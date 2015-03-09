@@ -17,16 +17,16 @@ MeanMonster::MeanMonster(STile startingTile){
 void MeanMonster::Update(STile l, STile f, STile r,STile d){
 
 
-    if(f != nullptr && f->GetType() != FootPrint){
+    if(f != nullptr && f->GetType() != TileType::FootPrint){
         JumpTile(f);
     }
-    else if(r != nullptr && r->GetType() != FootPrint){
+    else if(r != nullptr && r->GetType() != TileType::FootPrint){
         JumpTile(r);
     }
-    else if(d != nullptr && d->GetType() != FootPrint){
+    else if(d != nullptr && d->GetType() != TileType::FootPrint){
         JumpTile(d);
     }
-    else if(l != nullptr && l->GetType() != FootPrint){
+    else if(l != nullptr && l->GetType() != TileType::FootPrint){
         JumpTile(l);
     }
     else
@@ -40,14 +40,14 @@ void MeanMonster::GetCurrentTile(unsigned short& x, unsigned short& y){
 }
 
 void MeanMonster::JumpTile(STile nTile){
-    if(nTile->GetType() == Goal){
+    if(nTile->GetType() == TileType::Goal){
         std::cout << "Victory \n";
     }
     else
-    if(nTile != nullptr && nTile->GetType() != wall){
-        currentTile->SetType(FootPrint);
+        if(nTile != nullptr && nTile->GetType() != TileType::wall){
+            currentTile->SetType(TileType::FootPrint);
         currentTile = nTile;
-        currentTile->SetType(Monster);
+            currentTile->SetType(TileType::Monster);
     }
 }
 

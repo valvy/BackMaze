@@ -13,13 +13,17 @@
 #include <fstream>
 #include <iostream>
 #include "Tile.hpp"
+#include <unistd.h>
 
 #define fileName "maze.txt"
+
 
 class MazeLoader{
 public:
     static std::vector<std::vector<STile>> LoadFile();
     static bool SaveFile(std::vector<std::vector<STile>> dat);
+private:
+    static std::string GetDirectoryPath();
 };
 
 #endif

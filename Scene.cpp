@@ -9,7 +9,7 @@
 #include "Scene.hpp"
 
 Scene::Scene(){
-    //cells = MazeLoader::LoadFile();
+    cells = MazeLoader::LoadFile();
     invert = false;
     startMonster = false;
     unsigned short xRow = 0;
@@ -29,11 +29,11 @@ Scene::Scene(){
     //srand((unsigned int)time(nullptr));
     int randX = rand() % (cells.size() - 1);
     int randY = rand() % (cells[0].size() - 1);
-    cells[randX][randY]->SetType(Monster);
+    cells[randX][randY]->SetType(TileType::Monster);
     monster = SMonster(new MeanMonster(cells[randX][randY]));
     randX = rand() % (cells.size() - 1);
     randY = rand() % (cells[0].size() - 1);
-    cells[randX][randY]->SetType(Goal);    
+    cells[randX][randY]->SetType(TileType::Goal);
     
 }
 

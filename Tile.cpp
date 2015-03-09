@@ -9,7 +9,7 @@
 #include "Tile.hpp"
 
 Tile::Tile(GLfloat x, GLfloat y, GLfloat z, unsigned short aX, unsigned short aY){
-    type = Empty;
+    type = TileType::Empty;
     posX = x;
     posY = y;
     posZ = z;
@@ -43,16 +43,16 @@ TileType Tile::GetType(){
 }
 
 bool Tile::Hit(GLfloat X, GLfloat Y, bool kick){
-    if(type == Empty || type == wall){
+    if(type == TileType::Empty || type == TileType::wall){
         if(X > (posX - (TILE_SIZE)) && X < (posX + (TILE_SIZE * 1.5f))){
             if(Y > (posY - TILE_SIZE) && Y < (posY + TILE_SIZE * 1.5f)){
                 if(!kick){
-                    type = wall;
+                    type = TileType::wall;
                     colX = 1.0f;
                     colY = 0.85f;
                     colZ = 0.35f;
                 }else{
-                    type = Empty;
+                    type = TileType::Empty;
                     colX = 1.0f;
                     colY = 1.0f;
                     colZ = 1.0f;
@@ -65,17 +65,17 @@ bool Tile::Hit(GLfloat X, GLfloat Y, bool kick){
 }
 
 void Tile::SetType(TileType nType){
-    if(nType == Monster){
+    if(nType == TileType::Monster){
         colX = 0;
         colY = 1;
         colZ = 1;
     }
-    else if(nType == Goal){
+    else if(nType == TileType::Goal){
         colX = 1;
         colY =1;
         colZ = 0;
     }
-    else if(nType == FootPrint){
+    else if(nType == TileType::FootPrint){
         colX = 1;
         colY = 0;
         colZ = 0;

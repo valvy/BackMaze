@@ -12,15 +12,19 @@ std::vector<std::vector<STile>> MazeLoader::LoadFile(){
     
     std::vector<std::vector<STile>> tmp;
     
-    std::ifstream str (fileName);
+    std::ifstream str (MazeLoader::GetDirectoryPath() + '/' + fileName);
     
     if(str.good()){
         std::string line;
         
         while(!str.eof()){
+            std::vector<STile> buf;
             getline(str, line);
+            std::cout<< line << std::endl;
             for(unsigned short i = 0; i < line.length(); ++i){
-                
+                if(line[i] == 'e'){
+               
+                }
             }
         }
     }
@@ -32,15 +36,29 @@ std::vector<std::vector<STile>> MazeLoader::LoadFile(){
     return tmp;
 }
 
+#define GetCurrentDir getcwd
+
+std::string MazeLoader::GetDirectoryPath(){
+    char cCurrentPath[FILENAME_MAX];
+    
+    if(!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
+    {
+        return "Error";
+    }
+    
+    cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
+    
+    return cCurrentPath;
+}
+
 bool MazeLoader::SaveFile(std::vector<std::vector<STile>> dat){
-    std::cout<<"saving  to "<< fileName << std::endl;
-   // remove(fileName);
+    std::cout<<"saving  to "<<  MazeLoader::GetDirectoryPath()<< '/' << fileName << std::endl;
     std::fstream str;
-    str.open(fileName);
+    str.open(MazeLoader::GetDirectoryPath() + '/' + fileName);
     for (unsigned short i = 0; i < dat.size(); i++) {
         std::string line = "";
         for (unsigned short j = 0; j < dat[i].size(); j++) {
-            if(dat[i][j]->GetType() == wall){
+            if(dat[i][j]->GetType() == TileType::wall){
                 line += 'w';
             }
             else{

@@ -5,7 +5,7 @@ LIBS_WIN = -lopengl32 -lglu32 -lglu32 -lgdi32
 NAME= BackMaze
 
 All:
-	$(CC_UNIX)  *.cpp -std=c++11 *.mm $(LIBS_MAC) -Info.plist -stdlib=libc++ -o $(NAME) -O3 -fobjc-arc
+	$(CC_UNIX)  *.cpp -std=c++11 *.mm $(LIBS_MAC) -Info.plist -stdlib=libc++ -o $(NAME)  -O3 -fobjc-arc
 
 windows:
 	$(CC_WIN) *.cpp -std=c++11 $(LIBS_WIN) -O3 -o $(NAME).exe

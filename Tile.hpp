@@ -13,13 +13,14 @@
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #else
+#ifdef _WIN32
 #include <gl/gl.h>
 #include <gl/glu.h>
-//#include <gl/glaux.h>
 #include <windows.h>
 #endif
+#endif
 
-enum TileType{
+enum class TileType{
     Goal,
     Monster,
     Empty,
