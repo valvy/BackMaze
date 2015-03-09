@@ -15,12 +15,12 @@
 #include "Tile.hpp"
 #include <unistd.h>
 
-#define fileName "maze.txt"
+#define fileName "maze.dat"
 
 
 class MazeLoader{
 public:
-    static std::vector<std::vector<STile>> LoadFile();
+    static std::vector<std::string> LoadFile();
     static bool SaveFile(std::vector<std::vector<STile>> dat);
 private:
     static std::string GetDirectoryPath();

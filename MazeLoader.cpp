@@ -8,24 +8,16 @@
 
 #include "MazeLoader.hpp"
 
-std::vector<std::vector<STile>> MazeLoader::LoadFile(){
-    
-    std::vector<std::vector<STile>> tmp;
-    
+std::vector<std::string> MazeLoader::LoadFile(){
+    std::vector <std::string> buffer;
     std::ifstream str (MazeLoader::GetDirectoryPath() + '/' + fileName);
     
     if(str.good()){
         std::string line;
         
         while(!str.eof()){
-            std::vector<STile> buf;
             getline(str, line);
-            std::cout<< line << std::endl;
-            for(unsigned short i = 0; i < line.length(); ++i){
-                if(line[i] == 'e'){
-               
-                }
-            }
+            buffer.push_back(line);
         }
     }
     else{
@@ -33,7 +25,7 @@ std::vector<std::vector<STile>> MazeLoader::LoadFile(){
     }
     str.close();
     
-    return tmp;
+    return buffer;
 }
 
 #define GetCurrentDir getcwd
@@ -52,7 +44,6 @@ std::string MazeLoader::GetDirectoryPath(){
 }
 
 bool MazeLoader::SaveFile(std::vector<std::vector<STile>> dat){
-    std::cout<<"saving  to "<<  MazeLoader::GetDirectoryPath()<< '/' << fileName << std::endl;
     std::fstream str;
     str.open(MazeLoader::GetDirectoryPath() + '/' + fileName);
     for (unsigned short i = 0; i < dat.size(); i++) {
@@ -61,12 +52,17 @@ bool MazeLoader::SaveFile(std::vector<std::vector<STile>> dat){
             if(dat[i][j]->GetType() == TileType::wall){
                 line += 'w';
             }
+            else if(dat[i][j]->GetType() == TileType::Monster){
+                line += 'M';
+            }
+            else if(dat[i][j]->GetType() == TileType::Goal){
+                line += 'g';
+            }
             else{
                 line += 'e';
             }
         }
         str << line << std::endl;
-        std::cout<< line <<std::endl;
     }
     
     str.close();

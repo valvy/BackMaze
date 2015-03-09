@@ -22,6 +22,7 @@ Tile::Tile(GLfloat x, GLfloat y, GLfloat z, unsigned short aX, unsigned short aY
     
 }
 
+
 void Tile::DrawTile(){
     glBegin(GL_QUADS);
     {
@@ -47,15 +48,9 @@ bool Tile::Hit(GLfloat X, GLfloat Y, bool kick){
         if(X > (posX - (TILE_SIZE)) && X < (posX + (TILE_SIZE * 1.5f))){
             if(Y > (posY - TILE_SIZE) && Y < (posY + TILE_SIZE * 1.5f)){
                 if(!kick){
-                    type = TileType::wall;
-                    colX = 1.0f;
-                    colY = 0.85f;
-                    colZ = 0.35f;
+                    this->SetType(TileType::wall);
                 }else{
-                    type = TileType::Empty;
-                    colX = 1.0f;
-                    colY = 1.0f;
-                    colZ = 1.0f;
+                    this->SetType(TileType::Empty);
                 }
                 return true;
             }
@@ -65,21 +60,36 @@ bool Tile::Hit(GLfloat X, GLfloat Y, bool kick){
 }
 
 void Tile::SetType(TileType nType){
-    if(nType == TileType::Monster){
-        colX = 0;
-        colY = 1;
-        colZ = 1;
+    switch (nType){
+        case TileType::Monster:
+            colX = 0;
+            colY = 1;
+            colZ = 1;
+            break;
+        case TileType::Goal:
+            colX = 1;
+            colY =1;
+            colZ = 0;
+            break;
+        case TileType::Empty:
+            colX = 1.0f;
+            colY = 1.0f;
+            colZ = 1.0f;
+            break;
+        case TileType::FootPrint:
+            colX = 1;
+            colY = 0;
+            colZ = 0;
+            break;
+        case TileType::wall:
+            colX = 1.0f;
+            colY = 0.85f;
+            colZ = 0.35f;
+            break;
+        default:
+            break;
     }
-    else if(nType == TileType::Goal){
-        colX = 1;
-        colY =1;
-        colZ = 0;
-    }
-    else if(nType == TileType::FootPrint){
-        colX = 1;
-        colY = 0;
-        colZ = 0;
-    }
+    
     type = nType;
 }
 

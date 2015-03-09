@@ -9,7 +9,8 @@
 #include "Scene.hpp"
 
 Scene::Scene(){
-    cells = MazeLoader::LoadFile();
+    std::vector<std::string> buffer = MazeLoader::LoadFile();
+    
     invert = false;
     startMonster = false;
     unsigned short xRow = 0;
@@ -17,24 +18,29 @@ Scene::Scene(){
     for (GLfloat i = -0.84f; i < 0.9; i += 0.13f) {
         unsigned short yRow = 0;
         std::vector<STile> tmp;
+        
         for(GLfloat j = -0.84f; j < 0.9; j += 0.13f){
             tmp.push_back(STile( new Tile(i,j,0,xRow,yRow)));
+            switch (buffer[xRow][yRow]) {
+                case 'w':
+                    tmp[yRow]->SetType(TileType::wall);
+                    break;
+                case 'g':
+                    tmp[yRow]->SetType(TileType::Goal);
+                    break;
+                case 'M':
+                    tmp[yRow]->SetType(TileType::Monster);
+                    monster = SMonster(new MeanMonster(cells[yRow][xRow]));
+                    break;
+                default:
+                    break;
+            }
+            
             yRow++;
         }
         xRow++;
         cells.push_back(tmp);
     }
-    
-    //place the goal and the monster randomly in the field
-    //srand((unsigned int)time(nullptr));
-    int randX = rand() % (cells.size() - 1);
-    int randY = rand() % (cells[0].size() - 1);
-    cells[randX][randY]->SetType(TileType::Monster);
-    monster = SMonster(new MeanMonster(cells[randX][randY]));
-    randX = rand() % (cells.size() - 1);
-    randY = rand() % (cells[0].size() - 1);
-    cells[randX][randY]->SetType(TileType::Goal);
-    
 }
 
 void Scene::OnMouseDown(float x, float y){
@@ -48,14 +54,17 @@ void Scene::OnMouseDown(float x, float y){
 }
 
 void Scene::OnPressedKey(unsigned short keycode){
-    std::cout<< keycode <<std::endl;
     switch (keycode) {
         case SPACE_BAR:
             invert = (!invert)? true : false;
+            break;
         case ENTER_KEY:
             startMonster = (!startMonster)? true : false;
+            break;
         case S_KEY:
-            MazeLoader::SaveFile(this->cells);
+            //MazeLoader::SaveFile(this->cells);
+            std::cout<<"saving has been disabled \n";
+            break;
         default:
             break;
             

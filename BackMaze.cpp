@@ -24,7 +24,6 @@ void BackMaze::OnMouseDown(float x, float y){
 }
 
 void BackMaze::OnKeyDown(unsigned short keycode){
-    std::cout<< keycode << std::endl;
     if(keycode == ESCAPE_KEY){
         this->scene.release();
         this->scene = SScene(new Scene());
