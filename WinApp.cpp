@@ -57,23 +57,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     switch(msg)
     {
         case WM_KEYDOWN:
-            switch (wParam) {
-                case VK_SPACE:
-                    app->OnKeyDown(SPACE_BAR);
-                    break;
-                case VK_ESCAPE:
-                    app->OnKeyDown(ESCAPE_KEY);
-                    break;
-                case VK_EXECUTE:
-                    app->OnKeyDown(ENTER_KEY);
-                    break;
-                case 0x053:
-                    app->OnKeyDown(S_KEY);
-                    break;
-                default:
-                    break;
-            }
-            ;
+            app->OnKeyDown(wParam);
             break;
         case WM_CREATE:
             
