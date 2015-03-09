@@ -9,8 +9,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include "Application.hpp"
 #include <windows.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+
 
 
 WNDCLASSEX wc;
@@ -84,14 +83,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             hRC = wglCreateContext(hDC);
             wglMakeCurrent(hDC,hRC);
             break;
-        case WM_LBUTTONDOWN:
-            POINT p;
-            if(GetCursorPos(&p)){
-                if(ScreenToClient(hwnd, &p)){
-                    app->OnMouseDown(p.x,-(p.y - WINDOW_HEIGHT));
-                }
-            }
-            break;
         case WM_CLOSE:
             DestroyWindow(hwnd);
             wglMakeCurrent(hDC, nullptr);
@@ -102,10 +93,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             wglDeleteContext(hRC);
             PostQuitMessage(0);
             break;
+            
         default:
             return DefWindowProc(hwnd, msg, wParam, lParam);
     }
-    return 0;
+    return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
 
@@ -147,9 +139,23 @@ void Application::StartApp(){
     // Step 3: The Message Loop
     while(true)
     {
-        if(GetMessage(&Msg, nullptr,0,0) == 0){
-            break;
+        //GetMessage(&Msg, nullptr,0,0);
+        PeekMessage(&Msg, nullptr,0,0,PM_REMOVE);
+        
+        if(WM_QUIT == Msg.message){
+            return;
         }
+        
+        if((GetKeyState(VK_LBUTTON) & 0x100) != 0){
+            POINT p;
+            if(GetCursorPos(&p)){
+                if(ScreenToClient(hwnd, &p)){
+                    const unsigned short Y_OFFSET = 20;
+                    app->OnMouseDown(p.x,-(p.y - WINDOW_HEIGHT + Y_OFFSET));
+                }
+            }
+        }
+        
         glClearColor(0, 0, 0, 0);
         glClear(GL_COLOR_BUFFER_BIT);
         this->Update();
@@ -157,6 +163,7 @@ void Application::StartApp(){
         SwapBuffers(g_HDC);
         TranslateMessage(&Msg);
         DispatchMessage(&Msg);
+        
     }
 }
 

@@ -17,7 +17,8 @@
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #else
-//opengl
+#include <gl/gl.h>
+#include <gl/glu.h>
 #endif
 
 class Application{
