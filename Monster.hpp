@@ -9,23 +9,15 @@
 #ifndef BackMaze_Monster_hpp
 #define BackMaze_Monster_hpp
 #include "Tile.hpp"
-
+#include <vector>
 class MeanMonster{
 private:
     STile currentTile;
     void JumpTile(STile nTile);
-    class Path{
-    public:
-        typedef std::unique_ptr<Path> SPath;
-        SPath left;
-        SPath forward;
-        SPath down;
-        SPath right;
-        STile tile;
-    };
-    typedef std::unique_ptr<Path> SPath;
-    SPath path;
-    
+    bool CanJump(STile nTile);
+    std::vector<STile> prefTiles;
+    STile PreferedTile(STile l, STile f, STile r, STile d);
+    bool isAtGoal;
 public:
     MeanMonster(STile startingTile);
     void GetCurrentTile(unsigned short& x, unsigned short& y);

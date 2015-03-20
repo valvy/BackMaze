@@ -13,6 +13,7 @@ Scene::Scene(){
     
     invert = false;
     startMonster = false;
+    
     unsigned short xRow = 0;
     //creates all the tiles
     for (GLfloat i = -0.84f; i < 0.9; i += 0.13f) {
@@ -30,7 +31,7 @@ Scene::Scene(){
                     break;
                 case 'M':
                     tmp[yRow]->SetType(TileType::Monster);
-                    monster = SMonster(new MeanMonster(cells[yRow][xRow]));
+                    monster = SMonster(new MeanMonster(tmp[yRow]));
                     break;
                 default:
                     break;
