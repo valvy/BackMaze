@@ -17,8 +17,13 @@
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #else
+#ifdef __WIN32
 #include <gl/gl.h>
 #include <gl/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
 #endif
 
 class Application{

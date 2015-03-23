@@ -18,6 +18,10 @@
 #include <gl/glu.h>
 #include <windows.h>
 #endif
+#ifdef __linux__
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
 #endif
 
 enum class TileType{

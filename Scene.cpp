@@ -55,11 +55,13 @@ void Scene::OnMouseDown(float x, float y){
 }
 
 void Scene::OnPressedKey(unsigned short keycode){
+	std::cout << keycode << " " << ENTER_KEY << std::endl;
     switch (keycode) {
         case SPACE_BAR:
             invert = (!invert)? true : false;
             break;
         case ENTER_KEY:
+			std::cout<<"test \n";
             startMonster = (!startMonster)? true : false;
             break;
         case S_KEY:

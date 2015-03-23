@@ -23,6 +23,13 @@ const unsigned short ENTER_KEY = 36;
 const unsigned short S_KEY = 1;
 #endif
 
+#ifdef __linux__
+const unsigned short ESCAPE_KEY = 65307;
+const unsigned short SPACE_BAR = 32;
+const unsigned short ENTER_KEY = 65293;
+const unsigned short S_KEY = 1;
+#endif
+
 #if _WIN32
 const unsigned short ESCAPE_KEY = 27;
 const unsigned short SPACE_BAR = 32;
