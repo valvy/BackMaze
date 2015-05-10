@@ -6,12 +6,31 @@ LIBS_GNU = -lX11 -lGL -lGLU
 NAME= BackMaze
 
 All:
-	$(CC_UNIX) *.cpp -std=c++11  $(LIBS_GNU) -o $(NAME) -O3
+	#$(CC_UNIX) *.cpp -std=c++11  $(LIBS_GNU) -o $(NAME) -O3
+	make mac
+	make windows
 mac:
-	$(CC_UNIX) *.cpp -std=c++11 *.mm $(LIBS_MAC) -Info.plist -stdlib=libc++ -o $(NAME)  -O3 -fobjc-arc
-
+	mkdir ./tmp/
+	cp ./src/* ./tmp
+	rm -rf ./bin/$(NAME).app
+	mkdir ./bin/$(NAME).app
+	cd ./tmp && $(CC_UNIX) *.cpp -std=c++11 *.mm $(LIBS_MAC) -Info.plist -stdlib=libc++ -o $(NAME)  -O3 -fobjc-arc
+	mv ./tmp/$(NAME) ./bin/$(NAME).app
+	rm -rf ./tmp
+	cp ./resources/* ./bin/$(NAME).app
+	cp ./platforms/OSX/* ./bin/$(NAME).app
+	
+	
 windows:
-	$(CC_WIN) *.cpp -std=c++11 $(LIBS_WIN) -O3 -o $(NAME).exe
+	mkdir ./tmp/
+	cp ./src/* ./tmp/
+	rm -rf ./bin/$(NAME)
+	mkdir ./bin/$(NAME)
+	cd ./tmp && $(CC_WIN) *.cpp -std=c++11 $(LIBS_WIN) -O3 -o $(NAME).exe
+	mv ./tmp/$(NAME).exe ./bin/$(NAME)
+	rm -rf ./tmp
+	cp ./resources/* ./bin/$(NAME)
 clean:
-	rm $(NAME)
-	rm $(NAME).exe
+	rm -rf ./bin/$(NAME).app
+	rm -rf ./bin/$(NAME)
+
