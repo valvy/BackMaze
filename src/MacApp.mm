@@ -11,6 +11,7 @@
 #if TARGET_OS_MAC
 #import"MacApp.h"
 #import"BackMaze.hpp"
+#import "Globals.hpp"
 NSApplication* nsApplication;
 MacApp* app;
 
@@ -108,17 +109,7 @@ void Application::StartApp(){
     
 }
 
-void Application::OnMouseDown(float x, float y){
-    //virtual
-}
 
-void Application::OnKeyDown(unsigned short keycode){
-    //virtual
-}
-
-void Application::Update(){
-    //virtual
-}
 
 void Application::ExitApp(){
     [app close];

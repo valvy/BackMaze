@@ -10,7 +10,7 @@
 #include <windows.h>
 #include "BackMaze.hpp"
 #include <unistd.h>
-
+#include "Globals.hpp"
 WNDCLASSEX wc;
 HWND hwnd;
 MSG Msg;
@@ -173,17 +173,6 @@ void Application::StartApp(){
 }
 
 
-void Application::OnMouseDown(float x, float y){
-    //virtual
-}
-
-void Application::OnKeyDown(unsigned short keycode){
-    //virtual
-}
-
-void Application::Update(){
-    //virtual
-}
 
 void Application::ExitApp(){
     

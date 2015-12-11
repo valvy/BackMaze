@@ -7,7 +7,9 @@
 //
 
 #include "Scene.hpp"
-
+#include <iostream>
+#include "MazeLoader.hpp"
+#include "Globals.hpp"
 Scene::Scene(){
     std::vector<std::string> buffer = MazeLoader::LoadFile();
     

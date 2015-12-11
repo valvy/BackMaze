@@ -9,7 +9,7 @@
 #ifndef BackMaze_Tile_hpp
 #define BackMaze_Tile_hpp
 #include <memory>
-#include "Globals.hpp"
+
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #else

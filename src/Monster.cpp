@@ -8,7 +8,7 @@
 
 #include "Monster.hpp"
 #include <iostream>
-
+#include <time.h>
 MeanMonster::MeanMonster(STile startingTile){
     currentTile = startingTile;
     isAtGoal = false;

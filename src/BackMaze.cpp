@@ -7,8 +7,7 @@
 //
 
 #include "BackMaze.hpp"
-
-
+#include "Globals.hpp"
 BackMaze::BackMaze() : Application(){
     scene = SScene(new Scene());
     

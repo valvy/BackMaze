@@ -7,6 +7,12 @@
 //
 
 #include "MazeLoader.hpp"
+#include <fstream>
+#include <iostream>
+
+#include "Application.hpp"
+
+
 
 std::vector<std::string> MazeLoader::LoadFile(){
     std::vector <std::string> buffer;
@@ -20,7 +26,9 @@ std::vector<std::string> MazeLoader::LoadFile(){
         }
     }
     else{
-        std::cout<<"error : file does not exist \n ";
+        std::cout<<"error : file could not find maze.dat \nclosing application\n";
+        str.close();
+        exit(EXIT_FAILURE);
     }
     str.close();
     

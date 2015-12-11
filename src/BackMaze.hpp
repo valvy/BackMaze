@@ -8,12 +8,16 @@
 
 #ifndef BackMaze_BackMaze_hpp
 #define BackMaze_BackMaze_hpp
+#pragma once
 #include "Application.hpp"
-#include "Tile.hpp"
-#include "Monster.hpp"
 #include "Scene.hpp"
-#include <fstream>
 
+
+/*!
+ *  This class manages the actual data in the game
+ *  @author Heiko van der Heijden
+ *
+ */
 class BackMaze : public Application{
 public:
     BackMaze();
@@ -22,7 +26,9 @@ public:
     void OnMouseDown(float x, float y) override;
     void OnKeyDown(unsigned short keycode) override;
 private:
-    
+    /*!
+     *  The scene that is being played
+     */
     SScene scene;
     
 };

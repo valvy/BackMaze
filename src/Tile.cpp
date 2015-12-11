@@ -7,6 +7,7 @@
 //
 
 #include "Tile.hpp"
+#include "Globals.hpp"
 
 Tile::Tile(GLfloat x, GLfloat y, GLfloat z, unsigned short aX, unsigned short aY){
     type = TileType::Empty;
